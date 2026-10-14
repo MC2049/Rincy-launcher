@@ -217,6 +217,18 @@ cat /data/data/com.rincy.launcher/files/home/rincy-boot.log
 7. `terminal-emulator/build.gradle`：去 NDK，`abiFilters` 只留 `arm64-v8a`
 8. 放入 `assets/bootstrap-aarch64.zip` 与 `jniLibs/arm64-v8a/libtermux.so`
 
+## 版本策略（重要）
+
+**启动器版本独立管理，不随 Rincy 本体更新。**
+
+| | 版本号 | 什么时候变 | 更新方式 |
+|---|---|---|---|
+| 启动器 | `apply_patches.py` 里的 `APP_VERSION` + versionCode 补丁 | 仅当启动器自身（Java / 原生库 / 构建脚本）变化 | 重新安装 APK |
+| Rincy 本体 | 主仓库 `package.json` 的 `version`（设置弹窗里显示的那个） | 随本体功能更新 | 应用内「升级」按钮拉取，**无需重装 APK** |
+
+给本体改代码、改界面、改内置载荷，都不动启动器的版本号；
+APK 重新打包只是为了新用户开箱即得最新载荷，老用户走应用内升级即可。
+
 ## 许可与署名
 
 本启动器是 [termux-app](https://github.com/termux/termux-app)（GPLv3）的衍生作品，
