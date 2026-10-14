@@ -33,7 +33,7 @@ PKG_NAME = "com.rincy.launcher"
 APP_NAME = "Rincy"
 # 启动器自身版本——与 Rincy 本体版本无关：
 # 本体更新走应用内「升级」（拉主仓库载荷），只有启动器自身代码变化才升这个号
-APP_VERSION = "1.0.0"
+APP_VERSION = "1.0.1"
 
 log = []
 
@@ -66,7 +66,7 @@ patch("app/build.gradle", [
     ('applicationId "com.termux"', 'applicationId "%s"' % PKG_NAME),
     # 用启动器自己的版本号（便于覆盖安装）
     ('        versionCode 1002\n        versionName "0.118.3"',
-     '        versionCode 3000\n        versionName "%s"' % APP_VERSION),
+     '        versionCode 3001\n        versionName "%s"' % APP_VERSION),
     ('TERMUX_PACKAGE_NAME = "com.termux"', 'TERMUX_PACKAGE_NAME = "%s"' % PKG_NAME),
     ('TERMUX_APP_NAME = "Termux"', 'TERMUX_APP_NAME = "%s"' % APP_NAME),
     ('TERMUX_API_APP_NAME = "Termux:API"', 'TERMUX_API_APP_NAME = "%s:API"' % APP_NAME),

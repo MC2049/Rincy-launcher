@@ -126,6 +126,45 @@ public final class RincyUpgrade {
      */
     public static Result run(File workDir, File targetDir, String sourceUrl, Progress p)
         throws IOException {
+        // "auto"（或空）＝优先 Gitee（国内网络稳），彻底失败再试 GitHub；
+        // 明确指定了源就只用指定的。
+        String s0 = sourceUrl == null ? "" : sourceUrl.trim();
+        String[] candidates;
+        if (s0.isEmpty() || "auto".equals(s0)) {
+            candidates = new String[] {
+                "https://gitee.com/mc2049/Rincy.git",
+                "https://github.com/MC2049/Rincy.git",
+            };
+        } else {
+            candidates = new String[] { s0 };
+        }
+
+        IOException last = null;
+        Result result = new Result();
+        for (int c = 0; c < candidates.length; c++) {
+            try {
+                Result r = runSingle(workDir, targetDir, candidates[c], p);
+                result.archiveUrl = r.archiveUrl;
+                result.updated = r.updated;
+                result.unchanged = r.unchanged;
+                result.added = r.added;
+                result.guarded = r.guarded;
+                result.packageChanged = r.packageChanged;
+                result.backupPath = r.backupPath;
+                return result;
+            } catch (IOException e) {
+                last = e;
+                if (c < candidates.length - 1) {
+                    report(p, "这个源没成功，换镜像重试…", -1);
+                }
+            }
+        }
+        throw last != null ? last : new IOException("升级失败：没有取到可用文件");
+    }
+
+    /** 用单一源执行一次完整升级。 */
+    private static Result runSingle(File workDir, File targetDir, String sourceUrl,
+                                    Progress p) throws IOException {
         Result result = new Result();
         result.archiveUrl = archiveUrlFor(sourceUrl);
 

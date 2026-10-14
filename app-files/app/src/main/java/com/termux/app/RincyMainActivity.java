@@ -1104,6 +1104,7 @@ public class RincyMainActivity extends Activity {
         try {
             if (upgradeSourceGroup != null) {
                 int id = upgradeSourceGroup.getCheckedRadioButtonId();
+                if (id == R.id.upgradeAuto) return "auto";
                 if (id == R.id.upgradeGitee) return "https://gitee.com/mc2049/Rincy.git";
                 if (id == R.id.upgradeCustom && upgradeUrlInput != null) {
                     String s = upgradeUrlInput.getText().toString().trim();
@@ -1113,6 +1114,6 @@ public class RincyMainActivity extends Activity {
             }
         } catch (Throwable ignored) {
         }
-        return "https://github.com/mc2049/Rincy.git";
+        return "auto";
     }
 }
