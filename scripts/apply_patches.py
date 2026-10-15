@@ -32,7 +32,8 @@ LIBTERMUX_SO = os.environ.get("RINCY_LIBTERMUX_SO", "./libtermux.so")
 PKG_NAME = "com.rincy.launcher"
 APP_NAME = "Rincy"
 # 启动器自身版本——与 Rincy 本体版本无关：
-# 本体更新走应用内「升级」（拉主仓库载荷），只有启动器自身代码变化才升这个号
+# 本体更新走应用内「升级」（拉主仓库载荷），只有启动器自身代码变化才升这个号。
+# 号规则：x.y.z——革命性更新 x++，小更新 y++，小修小补 z++
 APP_VERSION = "1.0.1"
 
 log = []

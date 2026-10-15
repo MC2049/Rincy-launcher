@@ -219,6 +219,9 @@ cat /data/data/com.rincy.launcher/files/home/rincy-boot.log
 
 ## 版本策略（重要）
 
+**版本号规则：`x.y.z`——革命性更新 x++，小更新 y++，小修小补 z++。**
+启动器与本体各自按此规则独立走号。
+
 **启动器版本独立管理，不随 Rincy 本体更新。**
 
 | | 版本号 | 什么时候变 | 更新方式 |
